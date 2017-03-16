@@ -28,6 +28,10 @@ git clone https://github.com/jeetsukumaran/vim-buffergator.git ~/.vim/bundle/buf
 echo "Installing git fugitive..."
 git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
 
+# Simplyfold for python
+echo "Installing Simplyfold..."
+git clone https://github.com/tmhedberg/SimpylFold.git
+
 # Vim airline
 echo "Installing airline..."
 git clone git://github.com/powerline/fonts ~/fonts
