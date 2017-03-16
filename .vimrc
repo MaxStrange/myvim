@@ -32,8 +32,6 @@ augroup END
 let _curfile = expand("%:t")
 if _curfile =~ "Makefile" || _curfile =~ "makefile" || _curfile =~ ".*\.mk"
     set noexpandtab
-elseif cur_repo == "hpc"
-    set noexpandtab
 else
     set expandtab
     set tabstop=4
