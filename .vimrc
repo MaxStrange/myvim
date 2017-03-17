@@ -11,7 +11,7 @@ syntax on
 set backspace=2
 
 " Remap <Tab> to be switch to next buffer
-:nnoremap <Tab> :bNext<CR>
+:nnoremap <Tab> :bNext!<CR>
 
 " Remap <C-X> to close current buffer
 :nnoremap <C-X> :bdelete<CR>
