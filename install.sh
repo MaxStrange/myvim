@@ -28,6 +28,12 @@ if [ ! -d ~/.vim/bundle/ctrlp ]; then
     git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp
 fi
 
+# Conque
+if [ ! -d ~/.vim/bundle/conque ]; then
+    echo "Installing conque..."
+    git clone https://github.com/wkentaro/conque.vim ~/.vim/bundle/conque
+fi
+
 # Buffergator
 if [ ! -d ~/.vim/bundle/buffergator ]; then
     echo "Installing buffergator..."
