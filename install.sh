@@ -52,6 +52,12 @@ if [ ! -d ~/.vim/bundle/SimplyFold ]; then
     git clone https://github.com/tmhedberg/SimpylFold.git ~/.vim/bundle/SimplyFold
 fi
 
+# Powershell support
+if [ ! -d ~/.vim/bundle/vim-ps1 ]; then
+    echo "Installing Powershell support with vim-ps1 ..."
+    git clone https://github.com/PProvost/vim-ps1.git ~/.vim/bundle/vim-ps1
+fi
+
 # Vim airline
 if [ ! -d ~/.vim/bundle/vim-airline ]; then
     if [ ! -d "~/fonts" ]; then
