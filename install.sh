@@ -98,6 +98,13 @@ if [ ! -d ~/.vim/bundle/vim-ps1 ]; then
     git clone https://github.com/PProvost/vim-ps1.git ~/.vim/bundle/vim-ps1
 fi
 
+# Rust support
+
+if [ ! -d ~/.vim/bundle/rust.vim ]; then
+    echo "Installing Rust-lang..."
+    git clone --depth=1 https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
+fi
+
 # Vim airline
 if [ ! -d ~/.vim/bundle/vim-airline ]; then
     if [ ! -d "~/fonts" ]; then
