@@ -105,7 +105,7 @@ if [ ! -d ~/.vim/bundle/rust.vim ]; then
 fi
 
 # Scala support
-if [ ! -d ~/.vim/ftdetect]; then
+if [ ! -d ~/.vim/ftdetect ]; then
     echo "Installing vim-scala..."
     mkdir -p ~/.vim/{ftdetect,indent,syntax} && for d in ftdetect indent syntax ; do wget -O ~/.vim/$d/scala.vim https://raw.githubusercontent.com/derekwyatt/vim-scala/master/$d/scala.vim; done
 fi
