@@ -30,6 +30,7 @@ install https://github.com/tpope/vim-fugitive.git vim-fugitive
 install https://github.com/tmhedberg/SimpylFold.git SimplyFold
 install https://github.com/PProvost/vim-ps1.git vim-ps1
 install https://github.com/rust-lang/rust.vim.git rust.vim
+install https://github.com/vhda/verilog_systemverilog.vim
 
 If (-Not (Test-Path C:\Users\maxst\vimfiles\ftdetect))
 {
@@ -56,3 +57,4 @@ If (-Not (Test-Path C:\Users\maxst\vimfiles\bundle\vim-airline))
 }
 Set-Location C:\Users\maxst\vimfiles\bundle\vim-airline
 vim -c q "helptags doc/"
+

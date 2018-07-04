@@ -110,6 +110,12 @@ if [ ! -d ~/.vim/ftdetect ]; then
     mkdir -p ~/.vim/{ftdetect,indent,syntax} && for d in ftdetect indent syntax ; do wget -O ~/.vim/$d/scala.vim https://raw.githubusercontent.com/derekwyatt/vim-scala/master/$d/scala.vim; done
 fi
 
+# Verilog support
+if [ ! -d ~/.vim/bundle/verilog_systemverilog.vim ]; then
+    echo "Installing verilog support..."
+    git clone https://github.com/vhda/verilog_systemverilog.vim ~/.vim/bundle/verilog_systemverilog
+fi
+
 # Vim airline
 if [ ! -d ~/.vim/bundle/vim-airline ]; then
     if [ ! -d "~/fonts" ]; then
@@ -125,3 +131,4 @@ cd ~/.vim/bundle/vim-airline
 vim -c q "helptags doc/"
 
 echo "Done. Now copy the .vimrc from this directory to your home. Also, you may now need to change your terminal font to something for powerline."
+
