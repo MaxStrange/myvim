@@ -130,5 +130,10 @@ fi
 cd ~/.vim/bundle/vim-airline
 vim -c q "helptags doc/"
 
+# TMUX - plugin manager
+mkdir -p $HOME/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
 echo "Done. Now copy the .vimrc from this directory to your home. Also, you may now need to change your terminal font to something for powerline."
+echo "For TMUX save/restore functionality, you need to copy .tmux.conf into your home directory, open tmux and install the plug in with Ctrl-J-I"
 
