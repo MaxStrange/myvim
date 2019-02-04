@@ -1,0 +1,57 @@
+!! URxvt Setting
+URxvt*.depth: 32
+URxvt*.scrollBar: false
+
+!! To screw with fonts:
+!! Take a look in /usr/share/fonts/whatever for the different fonts that are installed
+!! Add a line in here for that font
+!! To reload this file, run xrdb .Xresources
+
+URxvt*letterSpace: 0
+!!!!!!!!!!!!!!!!!!!!!!!! FONTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define font1   DejaVu Sans Mono for Powerline
+#define font2   FreeMono
+#define font3   FreeSans
+#define font4   Droid Sans Mono for Powerline
+#define font5   Go Mono for Powerline
+
+! Our font
+URxvt*font: xft:font1:size=12, xft:font2:size=12, xft:font3:size=12, xft:font4:size=12, xft:font5:size=12
+
+! Fallback Barry font
+!!URxvt*.font: -xos4-terminus-medium-r-normal--18-180-72-72-c-100-iso10646-1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!! Disable hinting?
+!Xft.antialias: false
+!Xft.hinting: false
+
+!! Prevent 4K monitor from blowing up cursor size
+Xcursor.size: 32
+
+!! Disable that stupid ctrl-shift combo in urxvt
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+!! Dracula
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+

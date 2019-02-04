@@ -1,0 +1,291 @@
+[settings]
+throttle-ms = 50
+throttle-limit = 5
+screenchange-reload = true
+
+[bar/main]
+;;;;;;;;;;;;;;;;;; MISC ;;;;;;;;;;;;;;;;;;;;;;;;;;
+monitor = eDP-1
+
+fixed-center = false
+
+bottom = true
+
+modules-left = i3
+modules-center = xwindow
+modules-right = alsa battery filesystem network date
+
+wm-name = i3
+
+;;;;;;;;;;;;;;;;;; COLORS ;;;;;;;;;;;;;;;;;;;;;;;;
+overline-size = 2
+overline-color = #bc92f8
+underline-size = 2
+underline-color = #bc92f8
+
+color-blue-one     = #88003366
+color-white-yellow = #F8F8F2
+color-white-blue   = #80bfff
+color-yellow       = #e6e600
+color-green        = #006666
+color-gray-green   = #476b6b
+color-gray-blue    = #004466
+color-orange       = #e68a00
+color-black        = #1a1a00
+color-purple       = #751aff
+color-gray-purple  = #7575a3
+color-blue-two     = #006699
+
+color-blue-one-edge     = #88003366
+color-white-yellow-edge = #fcfc9c
+color-white-blue-edge   = #80bfff
+color-yellow-edge       = #fafa6b
+color-green-edge        = #009999
+color-gray-green-edge   = #527a7a
+color-gray-blue-edge    = #006699
+color-orange-edge       = #ffa31a
+color-black-edge        = #333300
+color-purple-edge       = #944dff
+color-gray-purple-edge  = #9494b8
+color-blue-two-edge     = #005580
+
+background = ${root.color-blue-one}
+foreground = ${root.color-white-yellow}
+
+;;;;;;;;;;;;;;;;;; SPACING ;;;;;;;;;;;;;;;;;;;;;;;
+;;;; The below settings allow the bar to float in the middle ;;;;
+;width = 90%
+;height = 27
+;override-redirect = true
+;offset-x = 5%
+;offset-y = 0
+;;;; These settings make the bar fill the screen horizontally ;;;
+width = 100%
+height = 27
+offset-x = 0
+offset-y = 0
+
+module-margin-left = 0
+module-margin-right = 2
+
+padding-right = 4
+padding-left = 4
+
+radius = 10.0
+
+;;;;;;;;;;;;;;;;;; FONTS ;;;;;;;;;;;;;;;;;;;;;;;;;
+; font name:size:vertical offset (positive moves it down)
+font-0 = DejaVu Sans:size=10;3
+font-1 = Droid Sans:size=10;3
+font-2 = Go:size=10;3
+font-3 = Termsynu:size=10;3
+font-4 = Unifont:size=10;3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;; MODULES ;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/alsa]
+type = internal/alsa
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding    = 2
+format-volume-background = ${root.color-gray-green}
+format-volume-foreground = ${root.color-white-yellow}
+format-volume-underline  = ${root.color-gray-green-edge}
+format-volume-overline   = ${root.color-gray-green-edge}
+
+format-muted-padding = 2
+format-muted-background = ${root.color-gray-green}
+format-muted-foreground = ${root.color-white-yellow}
+format-muted-underline  = ${root.color-gray-green-edge}
+format-muted-overline   = ${root.color-gray-green-edge}
+
+ramp-volume-0 = *)
+ramp-volume-1 = *))
+ramp-volume-2 = *)))
+
+label-volume = volume %percentage%
+label-volume-font = 0
+label-muted = X muted
+label-muted-font = 0
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging-background    = ${root.color-orange}
+format-charging-foreground    = ${root.color-black}
+format-charging-underline     = ${root.color-orange-edge}
+format-charging-overline      = ${root.color-orange-edge}
+format-charging-padding       = 2
+
+format-discharging-background = ${root.color-orange}
+format-discharging-foreground = ${root.color-black}
+format-discharging-underline  = ${root.color-orange-edge}
+format-discharging-overline   = ${root.color-orange-edge}
+format-discharging-padding    = 2
+
+format-full-background        = ${root.color-orange}
+format-full-foreground        = ${root.color-black}
+format-full-underline         = ${root.color-orange-edge}
+format-full-overline          = ${root.color-orange-edge}
+format-full-padding           = 2
+
+format-charging = <label-charging> <animation-charging>
+format-discharging = <label-discharging> <animation-discharging>
+format-full = <label-full>
+
+;⚡ <-- use this for battery sign
+label-charging = ⚡ %percentage%%
+label-discharging = ⚡ %percentage%%
+label-full = ⚡FULL
+
+ramp-capacity-0 = ▂
+ramp-capacity-1 = ▄
+ramp-capacity-2 = ▇
+ramp-capacity-foreground = #ffcddc
+
+animation-charging-0 = ▂
+animation-charging-1 = ▄
+animation-charging-2 = ▇
+animation-charging-foreground = #ffcddc
+animation-charging-framerate = 750
+
+animation-discharging-0 = ▇
+animation-discharging-1 = ▄
+animation-discharging-2 = ▂
+animation-discharging-foreground = #ffcddc
+animation-discharging-framerate = 750
+
+[module/date]
+type = internal/date
+date = ⏰ %%{T3}%m-%d-%Y %I:%M%%{T-}
+
+format-padding = 2
+format-background = ${root.color-purple}
+format-foreground = ${root.color-white-yellow}
+format-underline  = ${root.color-purple-edge}
+format-overline   = ${root.color-purple-edge}
+
+[module/filesystem]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /
+
+; Seconds to sleep between updates
+interval = 20
+
+; Display fixed precision values
+fixed-values = true
+
+; Spacing between entries
+spacing = 4
+
+format-mounted = <label-mounted>
+
+label-mounted = %free%
+
+format-mounted-background = ${root.color-blue-two}
+format-mounted-foreground = ${root.color-white-yellow}
+format-mounted-underline  = ${root.color-blue-two-edge}
+format-mounted-overline   = ${root.color-blue-two-edge}
+format-mounted-padding    = 2
+
+[module/i3]
+type = internal/i3
+
+format = <label-state> <label-mode>
+format-spacing = 0
+
+label-focused = %index%
+label-focused-padding = 2
+label-focused-margin = 1
+label-focused-font = 3
+label-focused-foreground = #fff
+label-focused-background = #2fbbf2
+label-focused-overline = #148ebe
+label-focused-underline = #148ebe
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+label-unfocused-margin = 1
+label-unfocused-background = #eeeeee
+label-unfocused-foreground = #dd222222
+label-unfocused-overline = #c5c5c5
+label-unfocused-underline = #c5c5c5
+label-unfocused-font = 3
+
+label-urgent = %index%
+label-urgent-padding = 2
+label-urgent-margin = 1
+label-urgent-font = 3
+
+label-visible = %index%
+label-visible-padding = 2
+label-visible-margin = 1
+label-visible-font = 3
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+
+; Seconds to sleep between updates
+interval = 3.0
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices have an unknown state, even when they're running
+unknown-as-up = true
+
+format-connected = <ramp-signal> <label-connected>
+format-disconnected = <label-disconnected>
+format-packetloss = <animation-packetloss> <label-connected>
+
+label-connected = %essid% %downspeed:9%
+label-connected-foreground = ${root.color-black}
+
+label-disconnected = Disconnected
+label-disconnected-foreground = ${root.color-black}
+
+; These are actually visible in the bar, even though we can't seem to see them in VIM
+; Only applies if <ramp-signal> is used
+ramp-signal-0 = 😱
+ramp-signal-1 = 😠
+ramp-signal-2 = 😒
+ramp-signal-3 = 😊
+ramp-signal-4 = 😃
+ramp-signal-5 = 😈
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+format-connected-background    = ${root.color-yellow}
+format-connected-foreground    = ${root.color-black}
+format-connected-underline     = ${root.color-yellow-edge}
+format-connected-overline      = ${root.color-yellow-edge}
+
+format-disconnected-background = ${root.color-yellow}
+format-disconnected-foreground = ${root.color-black}
+format-disconnected-underline  = ${root.color-yellow-edge}
+format-disconnected-overline   = ${root.color-yellow-edge}
+
+[module/xwindow]
+type = internal/xwindow
+label-font = 3
+
+; vim:ft=dosini

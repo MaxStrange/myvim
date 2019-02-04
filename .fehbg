@@ -1,0 +1,4 @@
+#!/bin/sh
+# This script is executed by .xinitrc and will fill the background with
+# the given image. Fill in the path with whatever makes sense.
+feh --bg-fill '/home/maxst/wallpaper.png'
