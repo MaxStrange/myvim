@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 # Pilfered from https://www.reddit.com/r/i3wm/comments/6lo0z0/how_to_use_polybar/
-# This script runs my status bar (polybar). It is invoked from .config/i3/config.
 
 # Terminate already running bar instances
 killall -q polybar
@@ -9,4 +8,7 @@ killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch polybar
-polybar main &
+for m in $(polybar --list-monitors | cut -d":" -f1); do
+    MONITOR=$m polybar --reload main &
+done
+

@@ -5,7 +5,7 @@ screenchange-reload = true
 
 [bar/main]
 ;;;;;;;;;;;;;;;;;; MISC ;;;;;;;;;;;;;;;;;;;;;;;;;;
-monitor = eDP-1
+monitor = ${env:MONITOR:}
 
 fixed-center = false
 
