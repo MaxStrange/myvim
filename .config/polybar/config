@@ -1,3 +1,6 @@
+; To symbols work, you need to choose the right font for the particular label
+; To determine which fonts work for symbols, try using gucharmap.
+
 [settings]
 throttle-ms = 50
 throttle-limit = 5
@@ -11,7 +14,7 @@ fixed-center = false
 
 bottom = true
 
-modules-left = i3
+modules-left = i3 powerbutton
 modules-center = xwindow
 modules-right = alsa battery filesystem network date
 
@@ -35,6 +38,7 @@ color-black        = #1a1a00
 color-purple       = #751aff
 color-gray-purple  = #7575a3
 color-blue-two     = #006699
+color-red          = #b30000
 
 color-blue-one-edge     = #88003366
 color-white-yellow-edge = #fcfc9c
@@ -80,6 +84,9 @@ font-1 = Droid Sans:size=10;3
 font-2 = Go:size=10;3
 font-3 = Termsynu:size=10;3
 font-4 = Unifont:size=10;3
+font-5 = DejaVu Sans:size=10:style=Bold;3
+; This font is useful for some missing emoticons
+font-6 = Noto Sans Symbols2:style=Regular;3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -108,14 +115,14 @@ format-muted-foreground = ${root.color-white-yellow}
 format-muted-underline  = ${root.color-gray-green-edge}
 format-muted-overline   = ${root.color-gray-green-edge}
 
-ramp-volume-0 = *)
-ramp-volume-1 = *))
-ramp-volume-2 = *)))
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
 
-label-volume = volume %percentage%
-label-volume-font = 0
-label-muted = X muted
-label-muted-font = 0
+label-volume = %percentage%
+label-volume-font = 6
+label-muted = 🔇 muted
+label-muted-font = 6
 
 [module/battery]
 type = internal/battery
@@ -169,7 +176,9 @@ animation-discharging-framerate = 750
 
 [module/date]
 type = internal/date
-date = ⏰ %%{T3}%m-%d-%Y %I:%M%%{T-}
+date = 🗓 %%{T3}%m-%d-%Y %I:%M%%{T-}
+label = %date%
+label-font = 6
 
 format-padding = 2
 format-background = ${root.color-purple}
@@ -194,7 +203,8 @@ spacing = 4
 
 format-mounted = <label-mounted>
 
-label-mounted = %free%
+label-mounted = 🖿 %free%
+label-mounted-font = 6
 
 format-mounted-background = ${root.color-blue-two}
 format-mounted-foreground = ${root.color-white-yellow}
@@ -284,8 +294,45 @@ format-disconnected-foreground = ${root.color-black}
 format-disconnected-underline  = ${root.color-yellow-edge}
 format-disconnected-overline   = ${root.color-yellow-edge}
 
+[module/powerbutton]
+type = custom/menu
+
+;; label-open is the power symbol
+;label-open = ⏻
+;label-open-font = 6
+;
+;label-close = No
+;label-close-font = 6
+;
+;; Optional item separator
+;; Default: none
+;label-separator = " "
+
+
+format-spacing = 1
+
+label-open = ⏻
+label-open-foreground = ${root.color-red}
+label-open-font = 6
+label-close = 🗙 cancel
+label-close-foreground = ${root.color-white-blue}
+label-close-font = 6
+label-separator = |
+label-separator-foreground = ${root.color-white-blue}
+label-separator-font = 6
+
+menu-0-0 = ↻ reboot
+menu-0-0-foreground = ${root.color-white-blue}
+menu-0-0-font = 6
+menu-0-0-exec = systemctl reboot
+
+menu-0-1 = ⚠ power down
+menu-0-1-foreground = ${root.color-white-blue}
+menu-0-1-font = 6
+menu-0-1-exec = systemctl poweroff -i
+
 [module/xwindow]
 type = internal/xwindow
-label-font = 3
+label-font = 1
 
 ; vim:ft=dosini
