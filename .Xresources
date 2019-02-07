@@ -55,3 +55,122 @@ URxvt.iso14755_52: false
 *.color15:    #E6E6E6
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+!!!! Weird Blue
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! special
+!!*.foreground:   #e8dfd6
+!!*.background:   #1c1d47
+!!*.cursorColor:  #e8dfd6
+!!
+!!! black
+!!*.color0:       #1d2224
+!!*.color8:       #294146
+!!
+!!! red
+!!*.color1:       #d5a451
+!!*.color9:       #df9a07
+!!
+!!! green
+!!*.color2:       #4dad46
+!!*.color10:      #11cd44
+!!
+!!! yellow
+!!*.color3:       #c7c442
+!!*.color11:      #cbd90e
+!!
+!!! blue
+!!*.color4:       #2d58c7
+!!*.color12:      #1380de
+!!
+!!! magenta
+!!*.color5:       #ea93e0
+!!*.color13:      #c36cdb
+!!
+!!! cyan
+!!*.color6:       #6edad6
+!!*.color14:      #20e0dd
+!!
+!!! white
+!!*.color7:       #818372
+!!*.color15:      #b1dad6
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!! Weird Purple
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! special
+!!*.foreground:   #efe2e2
+!!*.background:   #1c0e28
+!!*.cursorColor:  #efe2e2
+!!
+!!! black
+!!*.color0:       #52528e
+!!*.color8:       #e1d2cf
+!!
+!!! red
+!!*.color1:       #646fb6
+!!*.color9:       #19933c
+!!
+!!! green
+!!*.color2:       #8699d3
+!!*.color10:      #ff6915
+!!
+!!! yellow
+!!*.color3:       #7590f1
+!!*.color11:      #84ffd7
+!!
+!!! blue
+!!*.color4:       #a031a5
+!!*.color12:      #00b0d2
+!!
+!!! magenta
+!!*.color5:       #411b14
+!!*.color13:      #795c19
+!!
+!!! cyan
+!!*.color6:       #690813
+!!*.color14:      #12ff00
+!!
+!!! white
+!!*.color7:       #5e5f62
+!!*.color15:      #0bdb21
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!! Barry Theme
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!! Solarized 16-color scheme (I hope)
+!!URxvt*background: [85]#002b36
+!!*foreground: #839496
+!!
+!!!! black dark/light
+!!*color0: #073642
+!!*color8: #002b36
+!!
+!!!! red dark/light
+!!*color1: #dc322f
+!!*color9: #cb4b16
+!!
+!!!! green dark/light
+!!*color2: #859900
+!!*color10: #586e75
+!!
+!!!! yellow dark/light
+!!*color3: #b58900
+!!*color11: #657b83
+!!
+!!!! blue dark/light
+!!*color4: #268bd2
+!!*color12: #839496
+!!
+!!!! magenta dark/light
+!!*color5: #d33682
+!!*color13: #6c71c4
+!!
+!!!! cyan dark/light
+!!*color6: #2aa198
+!!*color14: #93a1a1
+!!
+!!!! white dark/light
+!!*color7: #eee8d5
+!!*color15: #fdf6e3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
