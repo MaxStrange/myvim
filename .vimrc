@@ -81,6 +81,9 @@ augroup langgroup
     autocmd FileType elixir set autoindent
 augroup END
 
+" No bell!
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 " Code folding
 set foldlevel=99
