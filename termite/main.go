@@ -8,6 +8,7 @@ import (
 
 	"termite/internal/input"
 	"termite/internal/uart"
+	"termite/internal/util"
 
 	"go.bug.st/serial"
 	"golang.org/x/exp/slices"
@@ -106,6 +107,23 @@ func scanAndExit() {
 	os.Exit(0)
 }
 
+// Convert lineEndingMode to an actual line ending
+func getLineEnding(lineEndingMode string) string {
+	lineEnding := ""
+	switch {
+	case lineEndingMode == "LF":
+		lineEnding = "\n"
+	case lineEndingMode == "LFCR":
+		lineEnding = "\n\r"
+	case lineEndingMode == "CR":
+		lineEnding = "\r"
+	default:
+		log.Fatal("Assertion failed. LineEnding is something unexpected. This is an internal logic error.")
+	}
+
+	return lineEnding
+}
+
 func main() {
 	var portFlag = flag.String("port", "", "Port to open")
 	var baudFlag = flag.Int("baud", 115200, "Baud rate")
@@ -114,6 +132,7 @@ func main() {
 	var stopBitsFlag = flag.String("stop-bits", "1", "Number of stop bits. Choices: [1, 1.5, 2]")
 	var scanPortsFlag = flag.Bool("scan-ports", false, "If given, we scan the available ports, print them, and exit")
 	var lineEndingsFlag = flag.String("line-endings", "LF", "Line ending mode. Choices: [LF, LFCR, CR]")
+	var removeEchoFlag = flag.Bool("remove-echo", false, "If given, we remove an echo if the remote end is sending one back")
 	flag.Parse()
 
 	// First check if the user wants to scan ports
@@ -127,11 +146,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Use CTRL+a followed by x then <enter> to exit.")
-	c := make(chan string)
-	go uart.UartBridge(port, *lineEndingsFlag, *baudFlag, c)
-	go input.GetUserInput(c)
-	for true {
-		// Main thread has nothing to do
-	}
+	fmt.Println(util.Red + "Use CTRL+a to enter command mode. Type 'exit' while in command mode, then <enter> to exit." + util.Reset)
+	userBuffer := make(chan string)
+	cmdChannel := make(chan util.Command)
+	uartBridge := uart.New(getLineEnding(*lineEndingsFlag), *baudFlag, *removeEchoFlag, port, userBuffer, cmdChannel)
+	go input.GetUserInput(userBuffer, cmdChannel)
+
+	// Blocks until user asks to exit
+	uartBridge.Run()
 }
