@@ -15,15 +15,17 @@ const timeoutMs = 10.0
 
 // A wrapper around the serial.Port interface.
 type UartBridge struct {
-	LineEnding string
-	Baud       int
-	RemoveEcho bool
-	port       serial.Port
-	userBuffer chan string
-	cmdChannel chan util.Command
-	bufLen     int
-	readBuffer []byte
-	lastWrite  []byte
+	LineEnding     string
+	Baud           int
+	RemoveEcho     bool
+	port           serial.Port
+	userBuffer     chan string
+	cmdChannel     chan util.Command
+	bufLen         int
+	readBuffer     []byte
+	lastWrite      []byte
+	echoIndexWrite int
+	echoIndexRead  int
 }
 
 // Instantiate a UartBridge struct with the given options.
@@ -37,6 +39,8 @@ func New(lineEnding string, baud int, removeEcho bool, port serial.Port, userBuf
 	u.cmdChannel = cmdChannel
 	u.bufLen = calculateBufLen(u.Baud)
 	u.readBuffer = make([]byte, u.bufLen)
+	u.echoIndexWrite = -1
+	u.echoIndexRead = 0
 
 	// Initialize some additional state
 	setTimeout(u.port)
@@ -91,6 +95,68 @@ func setTimeout(port serial.Port) {
 	}
 }
 
+// Returns the number of bytes stripped off (from the left).
+func (ub *UartBridge) stripEcho(nbytesRead int) int {
+	// If write index is -1, we haven't sent anything yet, so there is no echo
+	if ub.echoIndexWrite == -1 {
+		return 0
+	}
+
+	// Nothing to do
+	if nbytesRead == 0 {
+		return 0
+	}
+
+	// Have already finished stripping this latest echo
+	if ub.echoIndexWrite >= len(ub.lastWrite) {
+		return 0
+	}
+
+	// If echoIndex is pointing to a character in lastWrite that matches the
+	// character in readBuffer at the same index,
+	// remove it from readBuffer and increment echoIndex
+	start := 0
+	end := -1
+	if ub.lastWrite[ub.echoIndexWrite] != ub.readBuffer[ub.echoIndexRead] {
+		// Nothing to strip
+		ub.echoIndexRead = 0
+		return 0
+	}
+
+	for ub.lastWrite[ub.echoIndexWrite] == ub.readBuffer[ub.echoIndexRead] {
+		end = ub.echoIndexRead
+		ub.echoIndexWrite += 1
+		ub.echoIndexRead += 1
+
+		if ((end - start) + 1) >= nbytesRead {
+			// We have examined all the bytes that we read this time around
+			ub.echoIndexRead = 0
+			break
+		}
+
+		if ub.echoIndexRead >= len(ub.readBuffer) {
+			// We are all done. Last user input was longer than our read buffer.
+			ub.echoIndexRead = 0
+			break
+		}
+
+		if ub.echoIndexWrite >= len(ub.lastWrite) {
+			// We are all done. We found all the characters from the echo
+			ub.echoIndexWrite = 0
+			break
+		}
+	}
+
+	// Sanity check
+	if (end < 0) || (start < 0) || (end < start) {
+		log.Fatalf("Somehow managed to compute an invalid start or end index: Start: %v, End: %v", start, end)
+	}
+
+	// Remove the subslice [start:end] from readBuffer
+	ub.readBuffer = ub.readBuffer[end+1:]
+	return (end - start) + 1
+}
+
 func (ub *UartBridge) readFromSerialPort() {
 	// Read from serial port
 	n, err := ub.port.Read(ub.readBuffer)
@@ -100,17 +166,18 @@ func (ub *UartBridge) readFromSerialPort() {
 
 	// Strip off echo
 	if ub.RemoveEcho {
-		// TODO
+		n -= ub.stripEcho(n)
 	}
 
 	// Write to console
-	if n != 0 {
+	if n > 0 {
 		output := string(ub.readBuffer[:n])
 		fmt.Printf("%v", output)
 	}
 }
 
 func (ub *UartBridge) writeToSerialPort(userInput string) {
+	ub.echoIndexWrite = 0
 	userInputAsBytes := []byte(userInput)
 	n, err := ub.port.Write(userInputAsBytes)
 	if err != nil {

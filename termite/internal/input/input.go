@@ -43,7 +43,7 @@ func handleCommand(userInput string, cmdBuffer chan util.Command) {
 
 // Get user input until we are given a stop command.
 func GetUserInput(userBuffer chan string, cmdBuffer chan util.Command) {
-	// TODO: Can't just read until we see a newline. We need to forward tabs as soon as we get them
+	// TODO: Can't just read until we see a newline. We need to forward characters every so often instead of waiting for newline
 
 	// Get OS signals like CTRL+C so we can forward them
 	go captureSignals(userBuffer)
